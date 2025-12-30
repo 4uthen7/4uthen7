@@ -1,107 +1,114 @@
-<svg fill="none" viewBox="0 0 800 250" width="800" height="250" xmlns="http://www.w3.org/2000/svg">
+<svg fill="none" viewBox="0 0 800 300" width="800" height="300" xmlns="http://www.w3.org/2000/svg">
   <foreignObject width="100%" height="100%">
     <div xmlns="http://www.w3.org/1999/xhtml">
       <style>
-        /* コンテナと背景、光の定義（前回と同じ） */
+        /* === 全体のコンテナ === */
         .container {
           width: 100%;
-          height: 250px;
+          height: 300px; /* 少し高さを広げました */
           display: flex;
           justify-content: center;
           align-items: center;
-          background-color: #0d1117;
-          background-image: radial-gradient(circle at center, rgba(40, 80, 120, 0.4) 0%, rgba(13, 17, 23, 1) 70%);
+          background-color: #0d1117; /* GitHub Dark背景色（単色） */
           position: relative;
           overflow: hidden;
-          perspective: 1000px; /* 3D効果のために追加 */
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          perspective: 1000px;
         }
-        .glow-effect {
-          position: absolute;
-          width: 200px;
-          height: 200px;
-          border-radius: 50%;
-          animation: pulseCenter 4s ease-in-out infinite;
-        }
-        @keyframes pulseCenter {
+
+        /* === 共通：ゆっくりぼんやり点滅するエフェクト === */
+        @keyframes slowBlurryGlow {
           0%, 100% {
-            box-shadow: 0 0 60px 30px rgba(100, 200, 255, 0.2), inset 0 0 60px 30px rgba(100, 200, 255, 0.1);
-            background-color: rgba(0, 20, 40, 0.8);
+            opacity: 0.8;
+            filter: blur(0.5px);
           }
           50% {
-            box-shadow: 0 0 100px 50px rgba(130, 220, 255, 0.4), inset 0 0 80px 40px rgba(130, 220, 255, 0.3);
-            background-color: rgba(0, 30, 60, 0.9);
+            opacity: 1;
+            filter: blur(0px);
+            text-shadow: 0 0 30px rgba(150, 220, 255, 0.6);
           }
         }
 
-        /* === ここから新しいテキストアニメーションの定義 === */
-
-        /* テキストを包むラッパー：全体の移動を担当 */
-        .text-wrapper {
+        /* === 背景：巨大な "4uthent" === */
+        .bg-text-container {
           position: absolute;
-          /* 左からスタートし、右端でバウンドして中央へ */
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 0; /* 最背面 */
+          display: flex; /* 文字を個別に制御するためFlexへ */
+        }
+        .bg-char {
+          font-size: 180px; /* 超巨大に */
+          font-weight: 900; /* しっかり中身の詰まった太字 */
+          color: rgba(30, 40, 55, 0.5); /* ベースは暗く沈ませる */
+          margin: 0 -5px; /* 文字間を少し詰める */
+          /* タイピング風ハイライトアニメーション設定 */
+          animation: typingHighlight 3.5s ease-in-out infinite;
+        }
+        
+        /* タイピング風に左から右へ明るい部分が移動するアニメーション */
+        @keyframes typingHighlight {
+          0%   { color: rgba(30, 40, 55, 0.5); text-shadow: none; }
+          10%  { color: rgba(200, 230, 255, 0.9); text-shadow: 0 0 40px rgba(100, 200, 255, 0.8); } /* 一瞬明るく */
+          25%  { color: rgba(30, 40, 55, 0.5); text-shadow: none; } /* 元に戻る */
+          100% { color: rgba(30, 40, 55, 0.5); text-shadow: none; }
+        }
+        /* 各文字のアニメーション開始時間をずらすことで移動感を出す */
+        .c1 { animation-delay: 0.0s; }
+        .c2 { animation-delay: 0.3s; }
+        .c3 { animation-delay: 0.6s; }
+        .c4 { animation-delay: 0.9s; }
+        .c5 { animation-delay: 1.2s; }
+        .c6 { animation-delay: 1.5s; }
+        .c7 { animation-delay: 1.8s; }
+
+
+        /* === 前景：滑り込んでくる "Form Follows Function" (前回のコードを継承) === */
+        .fg-text-wrapper {
+          position: absolute;
+          z-index: 10; /* 最前面 */
+          /* 左から右へ移動してバウンド */
           animation: moveAndBounce 3s cubic-bezier(0.3, 0, 0.3, 1) forwards;
-          /* 波のような上下の揺れを加える */
           transform-origin: center bottom;
         }
 
-        /* テキスト自体：衝突時の「こんにゃく変形」を担当 */
-        .text {
-          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        .fg-text {
           font-size: 42px;
           font-weight: bold;
           color: #e6edf3;
-          text-shadow: 0 0 15px rgba(100, 200, 255, 0.9);
           white-space: nowrap;
           display: inline-block;
-          /* 右端衝突のタイミングに合わせて変形 */
-          animation: squashAndStretch 3s cubic-bezier(0.3, 0, 0.3, 1) forwards, waveMotion 1s ease-in-out infinite alternate;
+          /* アニメーションの合成：
+             1. squashAndStretch: 衝突時のこんにゃく変形 (1回のみ実行)
+             2. waveMotion: 上下のふわふわ波動作 (ループ)
+             3. slowBlurryGlow: 今回追加したゆっくり点滅 (ループ)
+          */
+          animation: 
+            squashAndStretch 3s cubic-bezier(0.3, 0, 0.3, 1) forwards,
+            waveMotion 1s ease-in-out infinite alternate,
+            slowBlurryGlow 4s ease-in-out infinite; /* 全体の点滅を追加 */
         }
 
-        /* 左から右へ移動し、行き過ぎて戻る（バウンス）アニメーション */
+        /* (前回と同じ) 移動アニメーション */
         @keyframes moveAndBounce {
-          0% {
-            left: -50%; /* 画面外左からスタート */
-            opacity: 0;
-          }
-          10% {
-            opacity: 1;
-          }
-          60% {
-            left: 75%; /* 右の角付近まで行き過ぎる */
-          }
-          80% {
-            left: 45%; /* 少し戻りすぎる */
-          }
-          100% {
-            left: 50%; /* 最終的に中央に収まる */
-            transform: translateX(-50%); /* 中央揃えの補正 */
-          }
+          0% { left: -60%; opacity: 0; }
+          10% { opacity: 1; }
+          60% { left: 75%; }
+          80% { left: 45%; }
+          100% { left: 50%; transform: translateX(-50%); }
         }
 
-        /* 衝突時のこんにゃく感（潰れて伸びる）アニメーション */
+        /* (前回と同じ) こんにゃく変形アニメーション */
         @keyframes squashAndStretch {
-          0%, 55% {
-            transform: scale(1, 1); /* 通常状態 */
-          }
-          60% {
-            /* 右端衝突時：横に伸びて縦に潰れる */
-            transform: scale(1.2, 0.8) skewX(-10deg);
-            color: #ffffff; /* 衝突時に少し白く光る */
-          }
-          70% {
-             /* 反動：縦に伸びて横に潰れる */
-            transform: scale(0.9, 1.1) skewX(5deg);
-          }
-          85% {
-             /* 揺れ戻し */
-            transform: scale(1.05, 0.95);
-          }
-          100% {
-            transform: scale(1, 1); /* 元に戻る */
-          }
+          0%, 55% { transform: scale(1, 1); }
+          60% { transform: scale(1.2, 0.8) skewX(-10deg); }
+          70% { transform: scale(0.9, 1.1) skewX(5deg); }
+          85% { transform: scale(1.05, 0.95); }
+          100% { transform: scale(1, 1); }
         }
         
-        /* 移動中の波のようなゆらぎ */
+        /* (前回と同じ) 波動作 */
         @keyframes waveMotion {
           from { margin-top: -5px; }
           to { margin-top: 5px; }
@@ -109,11 +116,23 @@
 
       </style>
       <div class="container">
-        <div class="glow-effect"></div>
-        <div class="text-wrapper">
-          <h1 class="text">Form Follows Function</h1>
+        <div class="bg-text-container">
+          <span class="bg-char c1">4</span>
+          <span class="bg-char c2">u</span>
+          <span class="bg-char c3">t</span>
+          <span class="bg-char c4">h</span>
+          <span class="bg-char c5">e</span>
+          <span class="bg-char c6">n</span>
+          <span class="bg-char c7">t</span>
+        </div>
+
+        <div class="fg-text-wrapper">
+          <h1 class="fg-text">Form Follows Function</h1>
         </div>
       </div>
+    </div>
+  </foreignObject>
+</svg>
     </div>
   </foreignObject>
 </svg>
