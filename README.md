@@ -2,7 +2,7 @@
   <img src="header.svg" width="800" />
 </div>
 
-# Hi there! 👋 私は4uthent/4uthen7です。
+# Hi there! 👋 私は4uthent/高本です。
 
 ### 🚀 自己紹介
 - 🛠 **JavaScript** をメインにアプリを開発しています。
