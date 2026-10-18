@@ -72,8 +72,8 @@
 
     .nameA{animation:nameA 9s cubic-bezier(.65,0,.35,1) infinite;transform-origin:64px 236px}
     .nameB{animation:nameB 9s cubic-bezier(.65,0,.35,1) infinite;transform-origin:64px 236px;opacity:0}
-    @keyframes nameA{0%,38%{opacity:1;transform:translateY(0)}46%,100%{opacity:0;transform:translateY(-30px)}}
-    @keyframes nameB{0%,44%{opacity:0;transform:translateY(30px)}52%,90%{opacity:1;transform:translateY(0)}98%,100%{opacity:0;transform:translateY(-24px)}}
+    @keyframes nameA{0%,38%{opacity:1;transform:translateY(0)}46%,94%{opacity:0;transform:translateY(-30px)}100%{opacity:1;transform:translateY(0)}}
+    @keyframes nameB{0%,44%{opacity:0;transform:translateY(30px)}52%,88%{opacity:1;transform:translateY(0)}96%,100%{opacity:0;transform:translateY(-24px)}}
 
     .sheenA{animation:sheen 9s linear infinite .2s}
     .sheenB{animation:sheen 9s linear infinite 4.95s}
@@ -123,9 +123,6 @@
     .marquee{animation:marquee 26s linear infinite}
     @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-1136px)}}
 
-    .scan{animation:scan 7s ease-in-out infinite}
-    @keyframes scan{0%{transform:translateY(-140px);opacity:0}14%{opacity:.16}60%{opacity:.1}100%{transform:translateY(500px);opacity:0}}
-
     .pulse{animation:pulse 2.3s ease-in-out infinite;transform-origin:66px 52px}
     @keyframes pulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.8;transform:scale(2.1)}}
 
@@ -140,7 +137,7 @@
     @media (prefers-reduced-motion: reduce){
       *{animation:none !important}
       .nameA{opacity:1;transform:none}
-      .nameB,.sheenA,.sheenB,.glitchC,.glitchM,.scan,.dust{opacity:0}
+      .nameB,.sheenA,.sheenB,.glitchC,.glitchM,.dust{opacity:0}
       .caret{opacity:1}
     }
   </style>
@@ -228,8 +225,6 @@
       <text x="1200" y="458" class="mono" font-size="11" fill="#8E93A6" letter-spacing="4" textLength="1136" lengthAdjust="spacing">TYPESCRIPT · REACT · NODE · ELECTRON · PYTHON · POWERSHELL · DISCORD API ·</text>
     </g>
   </g>
-
-  <rect class="scan" x="0" y="0" width="1200" height="140" fill="#7C5CFF" opacity="0" style="filter:blur(40px);mix-blend-mode:multiply"/>
 
   <rect x=".5" y=".5" width="1199" height="479" fill="none" stroke="#0B0C12" stroke-opacity=".08"/>
 </svg>
