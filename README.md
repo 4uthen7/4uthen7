@@ -4,7 +4,7 @@
   <img src="assets/hero-dark.svg" width="100%" alt="高本 / 4uthent — full-stack engineer">
 </picture>
 
-Web アプリも、Discord の拡張も、面倒な手作業の自動化も。
+Web アプリも、Discord の拡張も、面倒な手作業の自動化も。<br>
 **「動くところまで」をひとりで持っていく**のが、いちばん得意なことです。
 
 <sub>Front end · API · data · infra · release — one continuous line.</sub>
