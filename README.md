@@ -1,17 +1,30 @@
-<div align="center">
-  <img src="header.svg" width="800" />
-</div>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/hero-light.svg">
+  <img src="assets/hero-dark.svg" width="100%" alt="高本 / 4uthent — full-stack engineer">
+</picture>
 
-# Hi there! 👋 私は4uthent/高本です。
+Web アプリも、Discord の拡張も、面倒な手作業の自動化も。
+**「動くところまで」をひとりで持っていく**のが、いちばん得意なことです。
 
-### 🚀 自己紹介
-- 🛠 アプリを開発しています。
-- 🤖 ユーザー体験をより良くする試みをしています。
-- 💡 日常の「ちょっとした不満」を解決するツールを作るのが好きです。
-- 👑 バウハウス哲学「Form Follows Function」形態は機能を追従する。という言葉に影響を受けています
-### 🛠 使用技術
-![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![React](https://img.shields.io/badge/-React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Node.js](https://img.shields.io/badge/-Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
+<sub>Front end · API · data · infra · release — one continuous line.</sub>
 
----
+### SELECTED WORK
+
+**[PingPeek](https://github.com/4uthen7/PingPeek)** — Discord の通知を「どこから来たか」まで見える化するプラグイン。通知音のフックから UI まで自前で、BetterDiscord / Vencord 両対応。
+
+<sub>ほかの実験作は [リポジトリ一覧](https://github.com/4uthen7?tab=repositories) に。</sub>
+
+### STACK
+
+`TypeScript` `JavaScript` `React` `Node.js` `Electron` `Python` `PowerShell` `Discord API`
+
+### NOW
+
+PingPeek の配布まわりと、Discord クライアント拡張の検証を進行中。
+
+### ELSEWHERE
+
+[GitHub](https://github.com/4uthen7) ・ [X](https://x.com/tkmt_wonderkid) ・ Discord `4uthent_`
+
+<sub>この README のヘッダーは SVG で動いています。OS の「アニメーションを減らす」設定では静止します。</sub>
